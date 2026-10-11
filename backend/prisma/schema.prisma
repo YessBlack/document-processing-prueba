@@ -24,7 +24,7 @@ model Upload {
   errorMessage String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  activityData  ActivityData[]
+  activityData ActivityData[]
 }
 
 model ActivityData {
@@ -35,5 +35,7 @@ model ActivityData {
   unit String
   date DateTime
   createdAt DateTime @default(now())
-  upload Upload @relation(fields: [uploadId], references: [id])
+  upload Upload @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+
+  @@index([uploadId])
 }
