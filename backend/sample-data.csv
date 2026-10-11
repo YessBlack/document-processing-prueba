@@ -1,0 +1,51 @@
+category,amount,unit,date
+Electricity,150.5,kWh,2024-01-01
+Natural Gas,82.7,m3,2024-01-02
+Water,12.4,m3,2024-01-03
+Paper,25.0,kg,2024-01-04
+Plastic,8.5,kg,2024-01-05
+Electricity,142.3,kWh,2024-01-06
+Natural Gas,79.2,m3,2024-01-07
+Water,11.8,m3,2024-01-08
+Paper,21.6,kg,2024-01-09
+Plastic,9.1,kg,2024-01-10
+Electricity,155.8,kWh,2024-01-11
+Natural Gas,84.1,m3,2024-01-12
+Water,13.2,m3,2024-01-13
+Paper,24.3,kg,2024-01-14
+Plastic,7.9,kg,2024-01-15
+Electricity,148.6,kWh,2024-01-16
+Natural Gas,81.5,m3,2024-01-17
+Water,12.7,m3,2024-01-18
+Paper,20.8,kg,2024-01-19
+Plastic,8.2,kg,2024-01-20
+Electricity,160.2,kWh,2024-01-21
+Natural Gas,86.3,m3,2024-01-22
+Water,14.1,m3,2024-01-23
+Paper,26.2,kg,2024-01-24
+Plastic,9.4,kg,2024-01-25
+Electricity,153.7,kWh,2024-01-26
+Natural Gas,80.9,m3,2024-01-27
+Water,11.5,m3,2024-01-28
+Paper,22.7,kg,2024-01-29
+Plastic,7.6,kg,2024-01-30
+Electricity,146.9,kWh,2024-01-31
+Natural Gas,83.6,m3,2024-02-01
+Water,13.5,m3,2024-02-02
+Paper,23.1,kg,2024-02-03
+Plastic,8.8,kg,2024-02-04
+Electricity,158.4,kWh,2024-02-05
+Natural Gas,77.8,m3,2024-02-06
+Water,12.1,m3,2024-02-07
+Paper,27.4,kg,2024-02-08
+Plastic,9.7,kg,2024-02-09
+Electricity,151.2,kWh,2024-02-10
+Natural Gas,85.7,m3,2024-02-11
+Water,14.6,m3,2024-02-12
+Paper,19.9,kg,2024-02-13
+Plastic,7.3,kg,2024-02-14
+Electricity,163.1,kWh,2024-02-15
+Natural Gas,88.2,m3,2024-02-16
+Water,13.8,m3,2024-02-17
+Paper,24.9,kg,2024-02-18
+Plastic,8.1,kg,2024-02-19
