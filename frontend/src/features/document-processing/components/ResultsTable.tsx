@@ -1,40 +1,48 @@
 'use client';
 
-import { DataTable } from '@/components/common/Table/DataTable';
+import { DataTable } from '@/components/common/DataTable';
 import { useUploadResults } from '@/features/document-processing/api/uploadsApi';
+
+interface ResultRow {
+  id: string;
+  category: string;
+  amount: number;
+  unit: string;
+  date: string;
+}
 
 export function ResultsTable({ uploadId }: { uploadId: string }) {
   const { data, isLoading, isError } = useUploadResults(uploadId, true);
 
-  if (isError || !data) {
+  if (isError) {
     return <p className="text-red-600">No se pudieron cargar los resultados.</p>;
   }
 
+  const rows: ResultRow[] = (data?.data ?? []).map((item, index) => ({
+    ...item,
+    id: `${item.category}-${item.date}-${index}`,
+  }));
+
   return (
     <DataTable
-      data={data.data}
+      data={rows}
       columns={[
         {
           key: 'category',
           label: 'Categoría',
-          className: 'font-medium text-gray-900',
         },
         {
           key: 'amount',
           label: 'Cantidad',
-          className: 'text-gray-700 tabular-nums',
         },
-        { key: 'unit', label: 'Unidad', className: 'text-gray-700' },
+        { key: 'unit', label: 'Unidad' },
         {
           key: 'date',
           label: 'Fecha',
           render: (_value, row) => row.date.slice(0, 10),
-          className: 'text-gray-600',
         },
       ]}
-      getRowId={(item, index) => `${item.category}-${item.date}-${index}`}
-      pageSize={10}
-      emptyMessage="No hay filas válidas para mostrar."
+      pageSize={15}
       isLoading={isLoading}
     />
   );

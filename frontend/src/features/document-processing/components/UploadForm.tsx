@@ -38,6 +38,7 @@ export function UploadForm() {
     }
 
     setProgress(0);
+    
     createUpload.mutate(
       { file: file, onProgress: (percent) => setProgress(percent) },
       {

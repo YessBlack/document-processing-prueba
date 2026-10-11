@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { DataTable } from '@/components/common/Table/DataTable';
+import { DataTable } from '@/components/common/DataTable';
 import { useUpload } from '@/features/document-processing/api/uploadsApi';
 import { ProcessingStatus } from '@/features/document-processing/components/ProcessingStatus';
 import { ResultsTable } from '@/features/document-processing/components/ResultsTable';
@@ -14,10 +14,6 @@ interface DetailRow {
 
 export function UploadDetail({ id }: { id: string }) {
   const { data, isLoading, isError } = useUpload(id);
-
-  if (isLoading) {
-    return <p>Cargando...</p>;
-  }
 
   if (isError || !data) {
     return <p className="text-red-600">No se encontró el upload.</p>;
@@ -47,16 +43,15 @@ export function UploadDetail({ id }: { id: string }) {
       <div className="mb-6">
         <DataTable
           data={detailRows}
+          isLoading={isLoading}
           columns={[
-            { key: 'label', label: 'Campo', className: 'w-1/3 font-semibold text-gray-700' },
+            { key: 'label', label: 'Campo' },
             {
               key: 'value',
               label: 'Detalle',
               render: (_value, row) => row.value,
-              className: 'text-gray-700',
             },
           ]}
-          getRowId={(row) => row.id}
         />
       </div>
 

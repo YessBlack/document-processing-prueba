@@ -8,8 +8,6 @@ import type {
   UploadsSummary,
 } from '@/features/document-processing/types/upload.types';
 
-// ---------- LEER ----------
-
 export function useUploads(page: number, limit: number) {
   return useQuery({
     queryKey: ['uploads', 'list', page, limit],
@@ -29,6 +27,7 @@ export function useUpload(id: string) {
       const response = await apiClient.get<UploadDetail>('/uploads/' + id);
       return response.data;
     },
+
     // Polling: vuelve a pedir cada 3 segundos mientras no haya terminado
     refetchInterval: (query) => {
       const status = query.state.data?.status;
@@ -63,8 +62,6 @@ export function useUploadsSummary() {
   });
 }
 
-// ---------- ESCRIBIR ----------
-
 interface CreateUploadInput {
   file: File;
   onProgress: (percent: number) => void;
@@ -85,6 +82,7 @@ export function useCreateUpload() {
           }
         },
       });
+      
       return response.data;
     },
     onSuccess: () => {
