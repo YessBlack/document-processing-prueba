@@ -17,7 +17,6 @@ export class FileProcessingWorker {
   }
 
   start(): void {
-    console.log('Worker iniciado, consultando la cola cada ' + this.intervalMs + ' ms');
     this.timer = setInterval(() => {
       this.tick();
     }, this.intervalMs);
@@ -39,10 +38,10 @@ export class FileProcessingWorker {
     try {
       const message = await this.messageConsumer.poll();
       if (message) {
-        console.log('Procesando upload ' + message.uploadId);
         const result = await this.processFileHandler.execute(
           new ProcessFileCommand(message.uploadId),
         );
+        
         if (!result.ok) {
           console.error('Falló el upload ' + message.uploadId + ': ' + result.error);
         }
