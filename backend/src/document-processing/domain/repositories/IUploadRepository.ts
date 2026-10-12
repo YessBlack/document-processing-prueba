@@ -1,4 +1,4 @@
-import { Upload } from '../entities/Upload';
+import { Upload } from '../entities/Upload'
 
 export interface IUploadRepository {
   save(upload: Upload): Promise<void>;

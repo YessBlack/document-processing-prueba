@@ -1,7 +1,7 @@
 export class ProcessFileCommand {
-  public uploadId: string;
+  public uploadId: string
 
-  constructor(uploadId: string) {
-    this.uploadId = uploadId;
+  constructor (uploadId: string) {
+    this.uploadId = uploadId
   }
 }

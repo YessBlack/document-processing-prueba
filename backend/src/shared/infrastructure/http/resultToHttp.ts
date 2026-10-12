@@ -1,9 +1,9 @@
-import type { Result } from '../../domain/Result';
-import { AppError } from './AppError';
+import type { Result } from '../../domain/Result'
+import { AppError } from './AppError'
 
-export function unwrapResult<T>(result: Result<T>, statusCode: number): T {
+export function unwrapResult<T> (result: Result<T>, statusCode: number): T {
   if (!result.ok) {
-    throw new AppError(result.error, statusCode);
+    throw new AppError(result.error, statusCode)
   }
-  return result.value;
+  return result.value
 }

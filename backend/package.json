@@ -9,7 +9,9 @@
     "worker": "tsx src/workers/FileProcessingWorker.ts",
     "build": "tsc",
     "migrate": "prisma migrate dev",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
@@ -28,8 +30,13 @@
   "devDependencies": {
     "@types/node": "^26.6.5",
     "@types/pg": "^8.23.1",
+    "eslint": "^10.12.0",
+    "neostandard": "^0.14.0",
     "prisma": "^7.10.0",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.3"
+  },
+  "eslintConfig": {
+    "extends": "ts-standard"
   }
 }
