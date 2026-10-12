@@ -15,6 +15,10 @@ interface DetailRow {
 export function UploadDetail({ id }: { id: string }) {
   const { data, isLoading, isError } = useUpload(id);
 
+  if (isLoading) {
+    return <div>Cargando Información</div>
+  }
+
   if (isError || !data) {
     return <p className="text-red-600">No se encontró el upload.</p>;
   }
