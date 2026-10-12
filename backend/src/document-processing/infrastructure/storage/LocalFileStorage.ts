@@ -13,8 +13,10 @@ export class LocalFileStorage implements IFileStorage {
 
   async save (fileName: string, content: Buffer): Promise<string> {
     await fs.mkdir(this.baseDir, { recursive: true })
+
     const storedName = randomUUID() + '-' + path.basename(fileName)
     const fullPath = path.join(this.baseDir, storedName)
+
     await fs.writeFile(fullPath, content)
     return fullPath
   }

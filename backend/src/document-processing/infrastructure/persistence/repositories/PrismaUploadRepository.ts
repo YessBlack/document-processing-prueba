@@ -17,6 +17,7 @@ export class PrismaUploadRepository implements IUploadRepository {
 
   async update (upload: Upload): Promise<void> {
     const data = PrismaUploadMapper.toPersistence(upload)
+
     await this.prisma.upload.update({
       where: { id: upload.getId() },
       data,
@@ -25,9 +26,11 @@ export class PrismaUploadRepository implements IUploadRepository {
 
   async findById (id: string): Promise<Upload | null> {
     const row = await this.prisma.upload.findUnique({ where: { id } })
+
     if (!row) {
       return null
     }
+
     return PrismaUploadMapper.toDomain(row)
   }
 
@@ -37,6 +40,7 @@ export class PrismaUploadRepository implements IUploadRepository {
       take: limit,
       orderBy: { createdAt: 'desc' },
     })
+
     const total = await this.prisma.upload.count()
 
     const data = rows.map((row) => PrismaUploadMapper.toDomain(row))
@@ -50,9 +54,11 @@ export class PrismaUploadRepository implements IUploadRepository {
     })
 
     const result: Record<string, number> = {}
+
     for (const group of groups) {
       result[group.status] = group._count.status
     }
+
     return result
   }
 }

@@ -6,6 +6,7 @@ import type { Upload as PrismaUpload } from '../../../../../generated/prisma/cli
 export class PrismaUploadMapper {
   static toDomain (row: PrismaUpload): Upload {
     const fileNameResult = FileName.create(row.fileName)
+
     if (!fileNameResult.ok) {
       throw new Error('Dato inválido en la base de datos: ' + fileNameResult.error)
     }

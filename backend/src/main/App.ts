@@ -29,8 +29,6 @@ import { registerDocumentProcessingRoutes } from '../document-processing/present
 import { prisma } from '../lib/prisma'
 import { FileProcessingWorker } from '../workers/FileProcessingWorker'
 
-// Worker
-
 export class App {
   private server: FastifyInstance
   private worker: FileProcessingWorker
@@ -39,7 +37,7 @@ export class App {
     // 1. Infraestructura (UNA sola instancia de cada una)
     const uploadRepository = new PrismaUploadRepository(prisma)
     const activityDataRepository = new PrismaActivityDataRepository(prisma)
-    const fileStorage = new LocalFileStorage(process.env.UPLOADS_DIR || './uploads')
+    const fileStorage = new LocalFileStorage(process.env.UPLOADS_DIR || './uploads-file')
     const messageQueue = new MockMessageQueue()
 
     // 2. Servicios y handlers
@@ -60,10 +58,7 @@ export class App {
 
     const getUploadByIdHandler = new GetUploadByIdQueryHandler(uploadRepository)
     const listUploadsHandler = new ListUploadsQueryHandler(uploadRepository)
-    const getUploadResultsHandler = new GetUploadResultsQueryHandler(
-      uploadRepository,
-      activityDataRepository
-    )
+    const getUploadResultsHandler = new GetUploadResultsQueryHandler(uploadRepository, activityDataRepository)
     const getUploadsSummaryHandler = new GetUploadsSummaryQueryHandler(uploadRepository)
 
     // 3. Servidor HTTP
