@@ -1,55 +1,54 @@
-import type { IMessageConsumer } from "../document-processing/infrastructure/messaging/IMessageConsumer";
-import type { ProcessFileCommandHandler } from "../document-processing/application/commands/handlers/ProcessFileCommandHandler";
-import { ProcessFileCommand } from "../document-processing/application/commands/objects/ProcessFileCommand";
-
+import type { IMessageConsumer } from '../document-processing/infrastructure/messaging/IMessageConsumer'
+import type { ProcessFileCommandHandler } from '../document-processing/application/commands/handlers/ProcessFileCommandHandler'
+import { ProcessFileCommand } from '../document-processing/application/commands/objects/ProcessFileCommand'
 
 export class FileProcessingWorker {
-  private messageConsumer: IMessageConsumer;
-  private processFileHandler: ProcessFileCommandHandler;
-  private intervalMs: number;
-  private timer: NodeJS.Timeout | null = null;
-  private isRunning: boolean = false;
+  private messageConsumer: IMessageConsumer
+  private processFileHandler: ProcessFileCommandHandler
+  private intervalMs: number
+  private timer: NodeJS.Timeout | null = null
+  private isRunning: boolean = false
 
-  constructor(messageConsumer: IMessageConsumer, processFileHandler: ProcessFileCommandHandler, intervalMs: number,) {
-    this.messageConsumer = messageConsumer;
-    this.processFileHandler = processFileHandler;
-    this.intervalMs = intervalMs;
+  constructor (messageConsumer: IMessageConsumer, processFileHandler: ProcessFileCommandHandler, intervalMs: number) {
+    this.messageConsumer = messageConsumer
+    this.processFileHandler = processFileHandler
+    this.intervalMs = intervalMs
   }
 
-  start(): void {
+  start (): void {
     this.timer = setInterval(() => {
-      this.tick();
-    }, this.intervalMs);
+      this.tick()
+    }, this.intervalMs)
   }
 
-  stop(): void {
+  stop (): void {
     if (this.timer) {
-      clearInterval(this.timer);
-      this.timer = null;
+      clearInterval(this.timer)
+      this.timer = null
     }
   }
 
-  private async tick(): Promise<void> {
+  private async tick (): Promise<void> {
     if (this.isRunning) {
-      return;
+      return
     }
-    this.isRunning = true;
+    this.isRunning = true
 
     try {
-      const message = await this.messageConsumer.poll();
+      const message = await this.messageConsumer.poll()
       if (message) {
         const result = await this.processFileHandler.execute(
-          new ProcessFileCommand(message.uploadId),
-        );
-        
+          new ProcessFileCommand(message.uploadId)
+        )
+
         if (!result.ok) {
-          console.error('Falló el upload ' + message.uploadId + ': ' + result.error);
+          console.error('Falló el upload ' + message.uploadId + ': ' + result.error)
         }
       }
     } catch (error) {
-      console.error('Error inesperado en el worker:', error);
+      console.error('Error inesperado en el worker:', error)
     } finally {
-      this.isRunning = false;
+      this.isRunning = false
     }
   }
 }
